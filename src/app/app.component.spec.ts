@@ -18,16 +18,40 @@ describe('App: Dashboard', () => {
     expect(app).toBeTruthy();
   }));
 
-  it(`should have as title 'app works!'`, async(() => {
+  it(`should define the company name`, async(() => {
     let fixture = TestBed.createComponent(AppComponent);
     let app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('app works!');
+    expect(app.title).toEqual('CompanyTM');
   }));
 
-  it('should render title in a h1 tag', async(() => {
+  it('should render a title in a h1', async(() => {
     let fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     let compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('app works!');
+    expect(compiled.querySelector('h1').textContent).toBeDefined();
+  }));
+
+  it('should define the available dashboards', async(() => {
+    let fixture = TestBed.createComponent(AppComponent);
+    let app = fixture.debugElement.componentInstance;
+    expect(app.dashboards.length).toBe(3);
+  }));
+
+  it('should add the dashboards to the nav', async(() => {
+    let fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    let compiled = fixture.debugElement.nativeElement;
+    let app = fixture.debugElement.componentInstance;
+    expect(compiled.querySelectorAll('nav li').length).toBe(3);
+    expect(compiled.querySelector('nav li a').textContent).toBe(app.dashboards[0].title);
+  }));
+
+  it('should link to the dashboards routes in the nav', async(() => {
+    let fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    let compiled = fixture.debugElement.nativeElement;
+    compiled.querySelector('nav li a').click();
+    // Now I should be in a new route
+    expect(true).toBe(false);
   }));
 });

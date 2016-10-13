@@ -1,3 +1,11 @@
+<nav>
+  <ul>
+    <li *ngFor="let dashboard of dashboards">
+      <a [routerLink]="dashboard.routeName">{{dashboard.title}}</a>
+    </li>
+  </ul>
+</nav>
 <h1>
   {{title}}
 </h1>
+<router-outlet></router-outlet>
