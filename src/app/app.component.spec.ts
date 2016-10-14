@@ -2,6 +2,9 @@
 
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { RouterTestingModule } from '@angular/router/testing';
+
+const fake_routes = [{path: 'p', component: AppComponent}];
 
 describe('App: Dashboard', () => {
   beforeEach(() => {
@@ -9,6 +12,7 @@ describe('App: Dashboard', () => {
       declarations: [
         AppComponent
       ],
+      imports: [RouterTestingModule.withRoutes(fake_routes)]
     });
   });
 
@@ -50,8 +54,9 @@ describe('App: Dashboard', () => {
     let fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     let compiled = fixture.debugElement.nativeElement;
-    compiled.querySelector('nav li a').click();
-    // Now I should be in a new route
-    expect(true).toBe(false);
+    let app = fixture.debugElement.componentInstance;
+    let currentPath = compiled.querySelector('nav li a').href.split('/').pop();
+    expect(currentPath).toBe(app.dashboards[0].routeName);
   }));
+
 });
