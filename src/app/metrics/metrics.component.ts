@@ -18,4 +18,6 @@ export class MetricsComponent implements OnInit {
     this.numOpenIssues = this.issuesService.getNumOpenIssues();
   }
 
+  
+
 }

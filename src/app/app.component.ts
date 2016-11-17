@@ -24,4 +24,5 @@ export class AppComponent {
       routeName: 'data'
     }
   ];
+  
 }

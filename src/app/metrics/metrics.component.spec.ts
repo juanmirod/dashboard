@@ -5,11 +5,10 @@ import { MetricsComponent } from './metrics.component';
 import { IssuesService } from '../issues.service';
 
 describe('Component: Metrics', () => {
-  
-  var component, issuesServiceStub;
+  let component, issuesServiceStub;
 
   beforeEach(() => {
-
+    
     issuesServiceStub = {
       getNumOpenIssues: () => 2
     };
@@ -25,7 +24,7 @@ describe('Component: Metrics', () => {
         providers: [{ provide: IssuesService, useValue: issuesServiceStub }]
       }
     });
-    
+
     component = TestBed.createComponent(MetricsComponent);
 
   });
@@ -39,4 +38,17 @@ describe('Component: Metrics', () => {
     component.detectChanges();
     expect(compiled.querySelector('#num-issues').textContent).toBe('2');
   }));
+
+  it('should show a line chart with the number of active users over time', async(() => {
+    let compiled = component.nativeElement;
+    component.detectChanges();
+    expect(compiled.querySelector('#active-users')).not.toBe(null);
+  }));
+
+  it('should show a bar chart with the number of issues over time', async(() => {
+    let compiled = component.nativeElement;
+    component.detectChanges();
+    expect(compiled.querySelector('#issues-time')).not.toBe(null);
+  }));
+
 });
